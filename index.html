@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apple Maps → Google Maps</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .converter {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      background: #00c6ff;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0072ff;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      word-wrap: break-word;
+    }
+
+    #output a {
+      color: #00ffcc;
+      font-weight: bold;
+      text-decoration: underline;
+      transition: color 0.3s;
+    }
+
+    #output a:hover {
+      color: #ffffff;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 1rem;
+      font-family: 'Courier New', Courier, monospace;
+      color: #d1d1d1;
+      text-shadow: 0 0 10px #00ffc3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="converter">
+    <h1>Apple Maps → Google Maps</h1>
+    <input id="appleLink" type="text" placeholder="Apple Maps linkini buraya yapıştır" />
+    <button onclick="convert()">Dönüştür</button>
+    <p id="output"></p>
+  </div>
+
+  <div class="footer">🚀 Designed by <strong>1kan</strong></div>
+
+  <script>
+    function convert() {
+      const link = document.getElementById("appleLink").value;
+      const coordsMatch = link.match(/ll=([\d.-]+),([\d.-]+)/);
+      const output = document.getElementById("output");
+
+      if (coordsMatch) {
+        const lat = coordsMatch[1];
+        const lng = coordsMatch[2];
+        const googleLink = `https://maps.google.com/?q=${lat},${lng}`;
+        output.innerHTML = `<a href="${googleLink}" target="_blank">🌍 Google Maps'te Aç</a>`;
+      } else {
+        output.innerHTML = "⚠️ Koordinat bulunamadı. Lütfen geçerli bir Apple Maps linki gir.";
+      }
+    }
+  </script>
+
+</body>
+</html>
